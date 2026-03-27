@@ -2,7 +2,7 @@ import pytest
 from src.converter import (celsius_to_fahrenheit,
                            celsius_to_kelvin,
                            convert,
-                           kelvin_to_celsius)
+                           kelvin_to_celsius, ABSOLUTE_ZERO_C)
 
 
 def test_freezing_c_to_f(freezing_point):
@@ -44,8 +44,8 @@ def test_convert_with_invalid_unit_raises():
 
 
 @pytest.mark.edge
-def test_convert_same_unit():
-    assert (25, 'C' , 'C') == pytest.approx(25.0)
+def test_conver_different_unit():
+    assert celsius_to_kelvin(-273.15) == pytest.approx(0.0)
 
 
 @pytest.mark.edge
@@ -53,6 +53,20 @@ def test_below_zero():
     with pytest.raises(ValueError):
         kelvin_to_celsius(-0.1)
 
+
+@pytest.mark.parametrize(
+    "value, from_unit, to_unit, expected_f",
+    [
+        (0, "C", "K", -ABSOLUTE_ZERO_C),
+        (0, "C", "F", 32.0),
+        (32.0, "F", "C", 0),
+        (32.0, "F", "K", -ABSOLUTE_ZERO_C),
+        (-ABSOLUTE_ZERO_C, "K", "C", 0),
+        (-ABSOLUTE_ZERO_C, "K", "F", 32.0)
+    ],
+)
+def test_convert(value, from_unit, to_unit, expected_f):
+    assert convert(value, from_unit, to_unit) == pytest.approx(expected_f)
 
 # TODO: add more tests to reach ≥ 80% coverage!
 # Suggestions:
