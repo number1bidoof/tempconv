@@ -55,7 +55,7 @@ def convert(value: float, from_unit: str, to_unit: str) -> float:
     """
     # Normalize to uppercase so 'c' and 'C' both work
     from_unit = from_unit.upper()
-    to_unit   = to_unit.upper()
+    to_unit = to_unit.upper()
 
     # If same unit, return as-is
     if from_unit == to_unit:
