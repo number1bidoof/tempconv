@@ -28,23 +28,29 @@ def test_c_to_f_cases(c, expected_f):
 def test_absolute_zero_kelvin():
     assert celsius_to_kelvin(-273.15) == pytest.approx(0.0)
 
+
 @pytest.mark.edge
 def test_below_absolute_zero_raises():
     with pytest.raises(ValueError):
         celsius_to_kelvin(-300)
+
+
 @pytest.mark.edge
 def test_convert_with_invalid_unit_raises():
     with pytest.raises(ValueError):
         convert(30.0, 'C', 'P')
 
+
 @pytest.mark.edge
 def test_convert_same_unit():
     assert (25,'C','C') == pytest.approx(25.0)
+
 
 @pytest.mark.edge
 def test_below_zero():
     with pytest.raises(ValueError):
         kelvin_to_celsius(-0.1)
+
 
 # TODO: add more tests to reach ≥ 80% coverage!
 # Suggestions:
