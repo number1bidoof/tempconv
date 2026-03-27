@@ -5,7 +5,6 @@ from src.converter import (celsius_to_fahrenheit,
                            kelvin_to_celsius)
 
 
-
 def test_freezing_c_to_f(freezing_point):
     # freezing_point is injected from conftest.py
     assert celsius_to_fahrenheit(freezing_point["C"]) == freezing_point["F"]
@@ -13,7 +12,6 @@ def test_freezing_c_to_f(freezing_point):
 
 def test_boiling_c_to_f(boiling_point):
     assert celsius_to_fahrenheit(boiling_point["C"]) == boiling_point["F"]
-
 
 
 @pytest.mark.parametrize("c, expected_f", [
@@ -47,7 +45,7 @@ def test_convert_with_invalid_unit_raises():
 
 @pytest.mark.edge
 def test_convert_same_unit():
-    assert (25,'C','C') == pytest.approx(25.0)
+    assert (25, 'C' , 'C') == pytest.approx(25.0)
 
 
 @pytest.mark.edge
